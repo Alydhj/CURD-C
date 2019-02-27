@@ -1,9 +1,13 @@
 document.write('<script type="text/javascript" src="./js/ksort.js"></script>');
 document.write('<script type="text/javascript" src="./js/md5.js"></script>');
 function setSign(param) {
+    
     var sign_key = '!@#$%^&*()_+1607phpC';
     var param_ = [];
+    
+    var sendParam = {};
     $.each(param, function (key, value) {
+        sendParam[key] = value;
         if (value !== '') {
             param_[key] = value;
         }
@@ -17,8 +21,8 @@ function setSign(param) {
     });
     query = query.join('&');
     var sign = $.md5(query + sign_key);
-    param.sign = sign;
-    return param;
+    sendParam.sign = sign;
+    return sendParam;
 }
 
 function get(url, data, callback) {
